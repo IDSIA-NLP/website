@@ -11,6 +11,19 @@ You only edit text files. The design is applied automatically.
 
 If something is wrong, the automatic check on the pull request shows a red ✗.
 
+### Found a mistake before it is merged?
+
+Fix it in the same pull request; no need to start over:
+
+1. Open the pull request → **"Files changed"** tab.
+2. On the file, click **"⋯" → "Edit file"**, correct it, and **Commit changes**
+   (it goes to the same branch, not to the live site).
+3. The checks and the preview update within a minute. Any earlier approval is
+   reset, so the final version is always the one that gets reviewed.
+
+To drop the change instead: **"Close pull request"**, then **"Delete branch"**.
+The preview is removed automatically.
+
 ## Your profile
 
 Edit `content/people/<your-name>/index.md`. The part between the `---` lines holds
