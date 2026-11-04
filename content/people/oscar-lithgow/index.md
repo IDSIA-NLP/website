@@ -11,8 +11,8 @@ bib_names: ["Lithgow-Serrano", "Lithgow"]
 links:
   website: ""
   scholar: ""
-  orcid: "0000-0003-1995-1669"
-  semanticscholar: ""
+  orcid: "https://orcid.org/0000-0003-1995-1669"
+  semanticscholar: "https://www.semanticscholar.org/author/Oscar-Lithgow-Serrano/1413928038"
   github: ""
   linkedin: ""
   researchgate: ""
