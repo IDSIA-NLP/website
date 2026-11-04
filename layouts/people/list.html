@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="wrap page">
+  <h1>{{ .Title }}</h1>
+  <div class="people-grid">
+    {{ range (where .Pages "Params.status" "current").ByWeight }}{{ partial "person-card.html" . }}{{ end }}
+  </div>
+  {{ with where .Pages "Params.status" "former" }}
+  <h2>Former members</h2>
+  <ul class="alumni">
+    {{ range sort . "Params.years" "desc" }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="muted">{{ .Params.role }}{{ with .Params.years }}, {{ . }}{{ end }}</span></li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div class="wrap narrow page">
+  <h1>{{ .Title }}</h1>
+  {{ with .Params.summary }}<p class="lead">{{ . }}</p>{{ end }}
+  <div class="prose">{{ .Content }}</div>
+</div>
+{{ end }}

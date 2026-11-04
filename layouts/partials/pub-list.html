@@ -1,0 +1,6 @@
+{{- /* Input: slice of publications. Renders a simple list. */ -}}
+{{- with . -}}
+<ul class="pubs">
+  {{- range . }}{{ partial "pub-item.html" . }}{{ end -}}
+</ul>
+{{- end -}}

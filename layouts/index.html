@@ -1,0 +1,51 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="wrap">
+    <h1>{{ .Params.tagline }}</h1>
+    <div class="lead">{{ .Content }}</div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><h2>Research themes</h2><a href="{{ "research/" | relURL }}">All research →</a></div>
+  <div class="grid grid-4">
+    {{ range (site.GetPage "/research").Pages.ByWeight }}
+    <a class="card theme-card theme-{{ .Params.theme }}" href="{{ .RelPermalink }}">
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Params.summary }}</p>
+    </a>
+    {{ end }}
+  </div>
+</section>
+
+<section class="wrap section two-col">
+  <div>
+    <div class="section-head"><h2>News</h2><a href="{{ "news/" | relURL }}">All news →</a></div>
+    <ul class="news-list">
+      {{ range first 4 (site.GetPage "/news").Pages.ByDate.Reverse }}
+      <li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time><div><strong>{{ .Title }}</strong> {{ .Content | plainify | truncate 160 }}</div></li>
+      {{ end }}
+    </ul>
+  </div>
+  <div>
+    <div class="section-head"><h2>Current projects</h2><a href="{{ "projects/" | relURL }}">All projects →</a></div>
+    <ul class="compact-list">
+      {{ range (site.GetPage "/projects").Pages.ByParam "start" | collections.Reverse }}
+        {{ if partial "is-active.html" . }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="muted">{{ .Params.summary }}</span></li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+</section>
+
+{{ $featured := slice }}
+{{ range .Params.featured_publications }}{{ $k := . }}{{ range site.Data.publications }}{{ if eq .key $k }}{{ $featured = $featured | append . }}{{ end }}{{ end }}{{ end }}
+{{ if not $featured }}{{ $featured = first 4 (site.Data.publications | default slice) }}{{ end }}
+{{ with $featured }}
+<section class="wrap section">
+  <div class="section-head"><h2>{{ if $.Params.featured_publications }}Selected{{ else }}Recent{{ end }} publications</h2><a href="{{ "publications/" | relURL }}">All publications →</a></div>
+  {{ partial "pub-list.html" . }}
+</section>
+{{ end }}
+{{ end }}

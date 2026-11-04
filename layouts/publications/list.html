@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{ $pubs := site.Data.publications | default slice }}
+<div class="wrap page">
+  <h1>{{ .Title }}</h1>
+  <p class="lead">{{ .Params.summary }}</p>
+  <div class="filters" role="group" aria-label="Filter by theme">
+    <button type="button" class="filter is-active" data-theme="">All</button>
+    {{ range site.Params.themes }}<button type="button" class="filter" data-theme="{{ .id }}">{{ .name }}</button>{{ end }}
+    <input type="search" id="pub-search" placeholder="Search title or author" aria-label="Search publications">
+  </div>
+  {{ $years := slice }}{{ range $pubs }}{{ $years = $years | append .year }}{{ end }}
+  {{ range sort ($years | uniq) "value" "desc" }}
+  <section class="year-group">
+    <h2>{{ . }}</h2>
+    {{ partial "pub-list.html" (where $pubs "year" .) }}
+  </section>
+  {{ end }}
+  <p id="pub-empty" class="muted" hidden>No publications match.</p>
+</div>
+{{ $js := resources.Get "js/publications.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" defer></script>
+{{ end }}

@@ -1,0 +1,35 @@
+{{ define "main" }}
+{{ $slug := .File.ContentBaseName }}
+<div class="wrap page">
+  <p class="crumb"><a href="{{ "people/" | relURL }}">People</a></p>
+  <div class="profile">
+    {{ with .Resources.GetMatch (.Params.photo | default "photo.*") }}
+      {{ $img := .Fill "400x400 Center" }}
+      <img class="profile-photo" src="{{ $img.RelPermalink }}" width="200" height="200" alt="Photo of {{ $.Title }}">
+    {{ end }}
+    <div>
+      <h1>{{ .Title }}</h1>
+      <p class="subtitle">{{ .Params.role }}{{ if eq .Params.status "former" }} (former member{{ with .Params.years }}, {{ . }}{{ end }}){{ end }}</p>
+      {{ partial "theme-tags.html" .Params.themes }}
+      <p class="profile-links">
+        {{ with .Params.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+        {{ $labels := dict "website" "Website" "scholar" "Google Scholar" "orcid" "ORCID" "semanticscholar" "Semantic Scholar" "github" "GitHub" "linkedin" "LinkedIn" "researchgate" "ResearchGate" }}
+        {{ range $k, $v := .Params.links }}{{ with $v }}<a href="{{ . }}">{{ index $labels $k | default $k }}</a>{{ end }}{{ end }}
+      </p>
+    </div>
+  </div>
+  <div class="narrow prose">{{ .Content }}</div>
+
+  {{ $projects := slice }}
+  {{ range (site.GetPage "/projects").Pages }}{{ if in .Params.people $slug }}{{ $projects = $projects | append . }}{{ end }}{{ end }}
+  {{ with $projects }}
+  <h2>Projects</h2>
+  <div class="grid grid-3">{{ range sort . "Params.start" "desc" }}{{ partial "project-card.html" . }}{{ end }}</div>
+  {{ end }}
+
+  {{ with partial "pubs-filtered.html" (dict "names" .Params.bib_names) }}
+  <h2>Publications with the group</h2>
+  {{ partial "pub-list.html" . }}
+  {{ end }}
+</div>
+{{ end }}

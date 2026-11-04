@@ -1,0 +1,10 @@
+<a class="person-card" href="{{ .RelPermalink }}">
+  {{ with .Resources.GetMatch (.Params.photo | default "photo.*") }}
+    {{ $img := .Fill "240x240 Center" }}
+    <img src="{{ $img.RelPermalink }}" width="120" height="120" alt="" loading="lazy">
+  {{ else }}
+    <span class="avatar-fallback" aria-hidden="true">{{ substr .Title 0 1 }}</span>
+  {{ end }}
+  <span class="person-name">{{ .Title }}</span>
+  <span class="person-role">{{ .Params.role }}</span>
+</a>

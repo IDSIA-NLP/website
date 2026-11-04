@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="wrap page">
+  <h1>{{ .Title }}</h1>
+  <p class="lead">{{ .Params.summary }}</p>
+  {{ range slice "active" "archived" }}
+    {{ $status := . }}
+    {{ with where $.Pages "Params.status" $status }}
+    {{ if eq $status "archived" }}<h2>Archived</h2><p class="muted">No longer maintained, kept online for reference.</p>{{ end }}
+    <div class="grid grid-2">
+      {{ range . }}
+      <article class="card resource-card">
+        <p class="kind">{{ .Params.resource_type }}</p>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Params.summary }}</p>
+        {{ partial "theme-tags.html" .Params.themes }}
+        <p class="card-links">{{ range .Params.links }}<a href="{{ .url }}">{{ .name }} →</a> {{ end }}</p>
+      </article>
+      {{ end }}
+    </div>
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="wrap page">
+  <h1>{{ .Title }}</h1>
+  {{ with .Params.summary }}<p class="lead">{{ . }}</p>{{ end }}
+  <div class="theme-list">
+  {{ range .Pages.ByWeight }}
+    <section class="theme-row theme-{{ .Params.theme }}">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <p class="lead-sm">{{ .Params.summary }}</p>
+      <div class="prose">{{ .Content }}</div>
+      <a href="{{ .RelPermalink }}">Projects, people and papers →</a>
+    </section>
+  {{ end }}
+  </div>
+</div>
+{{ end }}

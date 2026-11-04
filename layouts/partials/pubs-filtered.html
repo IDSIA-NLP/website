@@ -1,0 +1,11 @@
+{{- /* dict "theme" / "project" / "names" -> matching publications */ -}}
+{{- $out := slice -}}
+{{- range (site.Data.publications | default slice) -}}
+  {{- $p := . -}}
+  {{- $ok := false -}}
+  {{- with $.theme }}{{ if in $p.themes . }}{{ $ok = true }}{{ end }}{{ end -}}
+  {{- with $.project }}{{ if eq $p.project . }}{{ $ok = true }}{{ end }}{{ end -}}
+  {{- with $.names }}{{ $names := . }}{{ range $p.authors }}{{ if in $names .last }}{{ $ok = true }}{{ end }}{{ end }}{{ end -}}
+  {{- if $ok }}{{ $out = $out | append $p }}{{ end -}}
+{{- end -}}
+{{- return $out -}}

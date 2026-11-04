@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="wrap narrow page">
+  <h1>{{ .Title }}</h1>
+  {{ range .Pages.ByDate.Reverse.GroupByDate "2006" }}
+  <h2>{{ .Key }}</h2>
+  <ul class="news-list">
+    {{ range .Pages }}
+    <li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan" }}</time><div><strong>{{ .Title }}</strong><div class="prose">{{ .Content }}</div></div></li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</div>
+{{ end }}

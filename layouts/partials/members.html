@@ -1,0 +1,9 @@
+{{- /* Returns a dict: surname -> person page, for all people with bib_names */ -}}
+{{- $m := dict -}}
+{{- with site.GetPage "/people" -}}
+  {{- range .Pages -}}
+    {{- $p := . -}}
+    {{- range .Params.bib_names -}}{{- $m = merge $m (dict . $p) -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $m -}}

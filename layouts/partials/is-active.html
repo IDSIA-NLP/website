@@ -1,0 +1,2 @@
+{{- $end := .Params.end -}}
+{{- return (or (not $end) (ge (int $end) now.Year)) -}}

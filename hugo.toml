@@ -1,0 +1,69 @@
+baseURL = "https://nlp.idsia.ch/"
+languageCode = "en"
+title = "NLP Group · IDSIA"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "Natural language processing research at IDSIA USI-SUPSI, Lugano."
+  # Main contact shown on the site. Change it here only.
+  contact_name = "Oscar William Lithgow-Serrano"
+  contact_email = ""        # TODO: add group or contact email
+  github = "https://github.com/IDSIA-NLP"
+  address = ["IDSIA USI-SUPSI", "Polo universitario Lugano – Campus Est", "Via la Santa 1", "6962 Lugano-Viganello, Switzerland"]
+  map = "https://goo.gl/maps/MWDs9LP9fokESzfq6"
+
+# Research themes. The "id" is what you write in "themes:" in other files.
+[[params.themes]]
+  id = "health"
+  name = "Health and clinical text"
+[[params.themes]]
+  id = "languages"
+  name = "Languages, dialects and multilinguality"
+[[params.themes]]
+  id = "llm-trust"
+  name = "Understanding and trusting language models"
+[[params.themes]]
+  id = "literature"
+  name = "Knowledge from scientific literature"
+
+[menus]
+  [[menus.main]]
+    name = "Research"
+    pageRef = "/research"
+    weight = 10
+  [[menus.main]]
+    name = "Projects"
+    pageRef = "/projects"
+    weight = 20
+  [[menus.main]]
+    name = "People"
+    pageRef = "/people"
+    weight = 30
+  [[menus.main]]
+    name = "Publications"
+    pageRef = "/publications"
+    weight = 40
+  [[menus.main]]
+    name = "Resources"
+    pageRef = "/resources"
+    weight = 50
+  [[menus.main]]
+    name = "News"
+    pageRef = "/news"
+    weight = 60
+  [[menus.main]]
+    name = "Work with us"
+    pageRef = "/work-with-us"
+    weight = 70
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[imaging]
+  quality = 82
+  resampleFilter = "Lanczos"
+
+[outputs]
+  home = ["HTML"]
+  section = ["HTML"]

@@ -1,0 +1,20 @@
+{{- $members := partialCached "members.html" "members" -}}
+{{- $p := . -}}
+<li class="pub" data-themes="{{ delimit $p.themes " " }}" data-year="{{ $p.year }}">
+  <div class="pub-title">
+    {{- if $p.url }}<a href="{{ $p.url }}">{{ $p.title }}</a>{{ else }}{{ $p.title }}{{ end -}}
+    {{- with $p.award }} <span class="award">{{ . }}</span>{{ end -}}
+  </div>
+  <div class="pub-authors">
+    {{- range $i, $a := $p.authors -}}
+      {{- if $i }}, {{ end -}}
+      {{- with index $members $a.last -}}<a class="member" href="{{ .RelPermalink }}">{{ $a.full }}</a>{{- else -}}{{ $a.full }}{{- end -}}
+    {{- end -}}{{ if $p.editors }} (eds.){{ end }}
+  </div>
+  <div class="pub-meta">
+    {{- with $p.venue }}<span class="venue">{{ . }}</span>, {{ end }}{{ $p.year -}}
+    {{- with $p.pdf }} · <a href="{{ . }}">PDF</a>{{ end -}}
+    {{- with $p.code }} · <a href="{{ . }}">Code</a>{{ end -}}
+    {{- with $p.doi }} · <a href="https://doi.org/{{ . }}">DOI</a>{{ end -}}
+  </div>
+</li>

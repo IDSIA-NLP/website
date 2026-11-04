@@ -1,0 +1,16 @@
+# Who must approve changes to which files.
+# The LAST matching line wins. To add someone: add a line for their profile folder.
+
+# Everything else (pages, projects, news, publications, design): group leader
+*                                        @owlmx
+
+# Each person's profile: that person OR the group leader
+/content/people/oscar-lithgow/           @owlmx
+/content/people/andrea-franchini/        @Francan @owlmx
+/content/people/vani-kanjirangat/        @vanikanjirangat @owlmx
+
+# To add later (replace with GitHub usernames):
+# /content/people/tanja-samardzic/       @USERNAME @owlmx
+# /content/people/joseph-cornelius/      @USERNAME @owlmx
+# /content/people/gualtiero-marenco/     @Gualtier0 @owlmx
+# /content/people/samuel-corecco/        @USERNAME @owlmx

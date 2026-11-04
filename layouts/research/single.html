@@ -1,0 +1,26 @@
+{{ define "main" }}
+{{ $theme := .Params.theme }}
+<div class="wrap page">
+  <p class="crumb"><a href="{{ "research/" | relURL }}">Research</a></p>
+  <h1 class="theme-title theme-{{ $theme }}">{{ .Title }}</h1>
+  <p class="lead">{{ .Params.summary }}</p>
+  <div class="narrow prose">{{ .Content }}</div>
+
+  {{ $projects := where (site.GetPage "/projects").Pages "Params.themes" "intersect" (slice $theme) }}
+  {{ with $projects }}
+  <h2>Projects</h2>
+  <div class="grid grid-3">{{ range sort . "Params.start" "desc" }}{{ partial "project-card.html" . }}{{ end }}</div>
+  {{ end }}
+
+  {{ $people := where (where (site.GetPage "/people").Pages "Params.status" "current") "Params.themes" "intersect" (slice $theme) }}
+  {{ with $people }}
+  <h2>People</h2>
+  <div class="people-grid small">{{ range .ByWeight }}{{ partial "person-card.html" . }}{{ end }}</div>
+  {{ end }}
+
+  {{ with partial "pubs-filtered.html" (dict "theme" $theme) }}
+  <h2>Publications</h2>
+  {{ partial "pub-list.html" . }}
+  {{ end }}
+</div>
+{{ end }}

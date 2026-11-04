@@ -1,0 +1,10 @@
+<article class="card project-card">
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  <p class="card-sub">{{ .Params.full_title }}</p>
+  <p>{{ .Params.summary }}</p>
+  <p class="card-meta">
+    <span class="badge badge-{{ .Params.project_type }}">{{ if eq .Params.project_type "applied" }}Applied{{ else }}Research{{ end }}</span>
+    {{ .Params.start }}{{ if .Params.end }}{{ if ne (string .Params.end) (string .Params.start) }}–{{ .Params.end }}{{ end }}{{ else }}–now{{ end }}
+    {{ with .Params.funder }}· {{ . }}{{ end }}
+  </p>
+</article>

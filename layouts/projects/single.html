@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="wrap page">
+  <p class="crumb"><a href="{{ "projects/" | relURL }}">Projects</a></p>
+  <h1>{{ .Title }}</h1>
+  <p class="subtitle">{{ .Params.full_title }}</p>
+  <div class="detail">
+    <div class="prose">
+      <p class="lead">{{ .Params.summary }}</p>
+      {{ .Content }}
+      {{ with partial "pubs-filtered.html" (dict "project" .File.ContentBaseName) }}
+      <h2>Publications</h2>
+      {{ partial "pub-list.html" . }}
+      {{ end }}
+    </div>
+    <aside class="facts">
+      <dl>
+        <dt>Period</dt><dd>{{ .Params.start }}{{ if .Params.end }}{{ if ne (string .Params.end) (string .Params.start) }}–{{ .Params.end }}{{ end }}{{ else }}–ongoing{{ end }}</dd>
+        <dt>Type</dt><dd>{{ if eq .Params.project_type "applied" }}Applied research{{ else }}Research{{ end }}</dd>
+        {{ with .Params.funder }}<dt>Funding</dt><dd>{{ . }}</dd>{{ end }}
+        {{ with .Params.partners }}<dt>Partners</dt><dd>{{ delimit . "<br>" | safeHTML }}</dd>{{ end }}
+        {{ with .Params.people }}<dt>People</dt><dd>{{ partial "person-chips.html" . }}</dd>{{ end }}
+        {{ with .Params.themes }}<dt>Themes</dt><dd>{{ partial "theme-tags.html" . }}</dd>{{ end }}
+        {{ with .Params.links }}<dt>Links</dt><dd>{{ range . }}<a href="{{ .url }}">{{ .name }}</a><br>{{ end }}</dd>{{ end }}
+      </dl>
+    </aside>
+  </div>
+</div>
+{{ end }}

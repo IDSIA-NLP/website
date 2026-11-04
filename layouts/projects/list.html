@@ -1,0 +1,14 @@
+{{ define "main" }}
+<div class="wrap page">
+  <h1>{{ .Title }}</h1>
+  <p class="lead">{{ .Params.summary }}</p>
+  {{ $active := slice }}{{ $past := slice }}
+  {{ range sort .Pages "Params.start" "desc" }}
+    {{ if partial "is-active.html" . }}{{ $active = $active | append . }}{{ else }}{{ $past = $past | append . }}{{ end }}
+  {{ end }}
+  <h2>Current</h2>
+  <div class="grid grid-3">{{ range $active }}{{ partial "project-card.html" . }}{{ end }}</div>
+  <h2>Past</h2>
+  <div class="grid grid-3">{{ range $past }}{{ partial "project-card.html" . }}{{ end }}</div>
+</div>
+{{ end }}

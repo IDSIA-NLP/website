@@ -1,0 +1,20 @@
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong>NLP Group at IDSIA</strong><br>
+      {{ range site.Params.address }}{{ . }}<br>{{ end }}
+      <a href="{{ site.Params.map }}">Map</a>
+    </div>
+    <div>
+      <strong>Contact</strong><br>
+      {{ site.Params.contact_name }}<br>
+      {{ with site.Params.contact_email }}<a href="mailto:{{ . }}">{{ . }}</a><br>{{ end }}
+      <a href="{{ site.Params.github }}">GitHub</a>
+    </div>
+    <div>
+      <strong>Part of</strong><br>
+      <a href="https://www.idsia.ch">IDSIA</a><br>
+      <a href="https://www.usi.ch">USI</a> · <a href="https://www.supsi.ch">SUPSI</a>
+    </div>
+  </div>
+</footer>

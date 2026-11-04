@@ -1,0 +1,7 @@
+{{- with . -}}
+<ul class="tags">
+  {{- range . -}}
+  <li><a class="tag tag-{{ . }}" href="{{ printf "research/%s/" . | relURL }}">{{ partial "theme-name.html" . }}</a></li>
+  {{- end -}}
+</ul>
+{{- end -}}

@@ -1,0 +1,12 @@
+{{- /* Input: list of people slugs (or plain names) */ -}}
+{{- with . -}}
+<ul class="chips">
+  {{- range . -}}
+    {{- with site.GetPage (printf "/people/%s" .) -}}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{- else -}}
+      <li>{{ . }}</li>
+    {{- end -}}
+  {{- end -}}
+</ul>
+{{- end -}}

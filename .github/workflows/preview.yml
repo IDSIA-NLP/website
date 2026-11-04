@@ -1,0 +1,72 @@
+# Preview of a proposed change (pull request) on GitHub Pages:
+#   https://<org>.github.io/<repo>/pr-<number>/
+# A link is posted on the pull request. The preview is removed when the pull
+# request is closed. Previews are not indexed by search engines.
+name: Preview
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+permissions:
+  contents: write        # to update the gh-pages branch
+  pull-requests: write   # to post the preview link
+
+concurrency:
+  group: gh-pages        # one update of gh-pages at a time
+  cancel-in-progress: false
+
+env:
+  HUGO_VERSION: 0.145.0
+  PR: ${{ github.event.pull_request.number }}
+
+jobs:
+  preview:
+    # Only for changes proposed from inside this repository (not forks).
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build preview
+        if: github.event.action != 'closed'
+        run: |
+          curl -sSL -o hugo.tgz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
+          tar -xzf hugo.tgz hugo && sudo mv hugo /usr/local/bin/
+          python3 scripts/bib2json.py
+          OWNER="${GITHUB_REPOSITORY%%/*}"; REPO="${GITHUB_REPOSITORY#*/}"
+          OWNER="$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')"
+          echo "URL=https://${OWNER}.github.io/${REPO}/pr-${PR}/" >> "$GITHUB_ENV"
+          HUGO_PARAMS_PREVIEW="#${PR}" hugo --gc --minify \
+            --baseURL "https://${OWNER}.github.io/${REPO}/pr-${PR}/" -d "$RUNNER_TEMP/preview"
+
+      - name: Update gh-pages branch
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+          REMOTE="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$REMOTE" gh-pages >/dev/null; then
+            git clone -q --depth 1 --branch gh-pages "$REMOTE" "$RUNNER_TEMP/pages"
+          else
+            mkdir -p "$RUNNER_TEMP/pages" && cd "$RUNNER_TEMP/pages"
+            git init -q -b gh-pages && git remote add origin "$REMOTE"
+          fi
+          cd "$RUNNER_TEMP/pages"
+          touch .nojekyll
+          printf '<!doctype html><meta charset="utf-8"><title>Previews</title><p>Previews of proposed changes. The official site is <a href="https://nlp.idsia.ch/">nlp.idsia.ch</a>.</p>\n' > index.html
+          rm -rf "pr-${PR}"
+          if [ "${{ github.event.action }}" != "closed" ]; then
+            cp -r "$RUNNER_TEMP/preview" "pr-${PR}"
+          fi
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Preview pr-${PR} (${{ github.event.action }})"
+          git push -q origin gh-pages
+
+      - name: Post preview link
+        if: github.event.action == 'opened' || github.event.action == 'reopened'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body "Preview: ${URL}
+          (ready about 1 minute after this message; updates with every new commit)"
