@@ -13,7 +13,7 @@ If you have text data and a question about it, get in touch.
 
 ## Students
 
-We supervise bachelor's and master's theses and internships, mainly for students at USI and SUPSI. Topics follow our [research themes](../research/). Write to us with a short CV and the topics that interest you.
+We supervise and co-supervise bachelor's and master's theses and internships, mainly for students at USI and SUPSI. Topics follow our [research themes](../research/). Write to us with a short CV and the topics that interest you.
 
 ## Open positions
 

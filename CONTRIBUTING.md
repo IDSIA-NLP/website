@@ -82,8 +82,9 @@ One or two sentences. Links like [this](https://example.org) are fine.
 ## Projects
 
 Create or edit `content/projects/<short-name>.md`. Copy an existing project as a
-template. Leave `end` empty while the project runs. It moves to "Past"
-automatically after its end year.
+template. Leave `end` empty while the project runs. Then set it to a year
+(`2027`) or a year and month (`"2027-03"`); the project moves to "Past"
+automatically once that date has passed.
 
 `project_type`: `research` (public research funding) or `applied` (industry,
 Innosuisse, hospitals).

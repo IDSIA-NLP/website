@@ -5,10 +5,10 @@ summary: "Continues our work with biologists on extracting information about spe
 project_type: research    # research | applied
 funder: "Swiss National Science Foundation (SNF)"
 start: 2026
-end: ""               # leave empty while the project is running
+end: "2026-10"
 themes: ["literature"]
 people: ["joseph-cornelius", "oscar-lithgow"]        # folder names in content/people
 partners: ["Robert Waterhouse (University of Lausanne)"]
 links: []
 ---
-Working title. Starts in March 2026.
+Continued by Fabio Rinaldi.

@@ -4,7 +4,7 @@ role: "Researcher"
 status: current            # current | former
 weight: 4                # order on the People page
 photo: photo.jpg
-email: ""                 # e.g. name.surname@idsia.ch
+email: "vani.kanjirangat@supsi.ch"
 themes: ["languages", "llm-trust", "literature"]
 # Surname(s) as they appear in BibTeX author lists. Used to list your publications.
 bib_names: ["Kanjirangat", "Vani"]

@@ -14,7 +14,7 @@
     </div>
     <aside class="facts">
       <dl>
-        <dt>Period</dt><dd>{{ .Params.start }}{{ if .Params.end }}{{ if ne (string .Params.end) (string .Params.start) }}–{{ .Params.end }}{{ end }}{{ else }}–ongoing{{ end }}</dd>
+        <dt>Period</dt><dd>{{ .Params.start }}{{ if .Params.end }}{{ $endYear := substr (string .Params.end) 0 4 }}{{ if ne $endYear (string .Params.start) }}–{{ $endYear }}{{ end }}{{ else }}–ongoing{{ end }}</dd>
         <dt>Type</dt><dd>{{ if eq .Params.project_type "applied" }}Applied research{{ else }}Research{{ end }}</dd>
         {{ with .Params.funder }}<dt>Funding</dt><dd>{{ . }}</dd>{{ end }}
         {{ with .Params.partners }}<dt>Partners</dt><dd>{{ delimit . "<br>" | safeHTML }}</dd>{{ end }}

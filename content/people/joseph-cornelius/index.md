@@ -4,7 +4,7 @@ role: "Researcher"
 status: current            # current | former
 weight: 3                # order on the People page
 photo: photo.jpg
-email: ""                 # e.g. name.surname@idsia.ch
+email: "joseph.cornelius@supsi.ch"
 themes: ["health", "llm-trust", "literature"]
 # Surname(s) as they appear in BibTeX author lists. Used to list your publications.
 bib_names: ["Cornelius"]
