@@ -8,7 +8,7 @@
 
 <section class="wrap section">
   <div class="section-head"><h2>Research themes</h2><a href="{{ "research/" | relURL }}">All research →</a></div>
-  <div class="grid grid-4">
+  <div class="grid grid-4 themes-home">
     {{ range (site.GetPage "/research").Pages.ByWeight }}
     <a class="card theme-card theme-{{ .Params.theme }}" href="{{ .RelPermalink }}">
       <h3>{{ .Title }}</h3>

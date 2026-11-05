@@ -1,2 +1,7 @@
-{{- $end := .Params.end -}}
-{{- return (or (not $end) (ge (int $end) now.Year)) -}}
+{{- /* A project is current while "end" is empty or not yet passed.
+       end can be a year (2026: current until the year ends) or year-month ("2026-10"). */ -}}
+{{- $end := string (.Params.end | default "") -}}
+{{- $active := true -}}
+{{- if eq (len $end) 4 }}{{ $active = ge (int $end) now.Year }}
+{{- else if $end }}{{ $active = ge $end (now.Format "2006-01") }}{{ end -}}
+{{- return $active -}}

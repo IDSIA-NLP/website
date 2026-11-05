@@ -4,7 +4,7 @@ role: "Researcher"
 status: current            # current | former
 weight: 5                # order on the People page
 photo: photo.jpg
-email: "andrea.franchini@idsia.ch"
+email: "andrea.franchini@supsi.ch"
 themes: ["health"]
 # Surname(s) as they appear in BibTeX author lists. Used to list your publications.
 bib_names: ["Franchini"]

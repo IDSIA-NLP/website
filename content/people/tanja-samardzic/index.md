@@ -4,7 +4,7 @@ role: "Senior researcher"
 status: current            # current | former
 weight: 2                # order on the People page
 photo: photo.jpg
-email: ""                 # e.g. name.surname@idsia.ch
+email: "tanja.samardzic@supsi.ch"
 themes: ["languages"]
 # Surname(s) as they appear in BibTeX author lists. Used to list your publications.
 bib_names: ["Samardžić", "Samardzic"]

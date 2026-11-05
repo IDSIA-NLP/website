@@ -11,6 +11,19 @@ You only edit text files. The design is applied automatically.
 
 If something is wrong, the automatic check on the pull request shows a red ✗.
 
+### Found a mistake before it is merged?
+
+Fix it in the same pull request; no need to start over:
+
+1. Open the pull request → **"Files changed"** tab.
+2. On the file, click **"⋯" → "Edit file"**, correct it, and **Commit changes**
+   (it goes to the same branch, not to the live site).
+3. The checks and the preview update within a minute. Any earlier approval is
+   reset, so the final version is always the one that gets reviewed.
+
+To drop the change instead: **"Close pull request"**, then **"Delete branch"**.
+The preview is removed automatically.
+
 ## Your profile
 
 Edit `content/people/<your-name>/index.md`. The part between the `---` lines holds
@@ -69,8 +82,9 @@ One or two sentences. Links like [this](https://example.org) are fine.
 ## Projects
 
 Create or edit `content/projects/<short-name>.md`. Copy an existing project as a
-template. Leave `end` empty while the project runs. It moves to "Past"
-automatically after its end year.
+template. Leave `end` empty while the project runs. Then set it to a year
+(`2027`) or a year and month (`"2027-03"`); the project moves to "Past"
+automatically once that date has passed.
 
 `project_type`: `research` (public research funding) or `applied` (industry,
 Innosuisse, hospitals).

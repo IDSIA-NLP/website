@@ -8,7 +8,7 @@ disableKinds = ["taxonomy", "term"]
   description = "Natural language processing research at IDSIA USI-SUPSI, Lugano."
   # Main contact shown on the site. Change it here only.
   contact_name = "Oscar William Lithgow-Serrano"
-  contact_email = ""        # TODO: add group or contact email
+  contact_email = "oscarwilliam.lithgow@supsi.ch"   # replace with the group email once IT creates it
   github = "https://github.com/IDSIA-NLP"
   address = ["IDSIA USI-SUPSI", "Polo universitario Lugano – Campus Est", "Via la Santa 1", "6962 Lugano-Viganello, Switzerland"]
   map = "https://goo.gl/maps/MWDs9LP9fokESzfq6"

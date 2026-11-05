@@ -4,7 +4,7 @@ role: "Researcher"
 status: current            # current | former
 weight: 6                # order on the People page
 photo: photo.jpg
-email: "gualtiero.marenco@idsia.ch"
+email: "gualtiero.marenco@supsi.ch"
 themes: ["llm-trust"]
 # Surname(s) as they appear in BibTeX author lists. Used to list your publications.
 bib_names: ["Marenco"]
